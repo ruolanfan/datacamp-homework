@@ -1,0 +1,69 @@
+Sub test()
+
+    Dim ticker As String
+    Dim volumn As Long
+    Dim yearopen As Double
+    Dim yearclose As Double
+    Dim yearchange As Double
+    Dim percentchange As Double
+    Dim ws As Worksheet
+    Dim x As Long
+    Dim i As Long
+    
+    
+    For Each ws In Worksheets
+    
+    
+    x = 2
+    
+    Cells(1, 9).Value = "ticker"
+    Cells(1, 10).Value = "yearchange"
+    Cells(1, 12).Value = "volumn"
+    Cells(1, 11).Value = "percentchange"
+    
+    lastrow = Cells(Rows.Count, 1).End(xlUp).Row
+
+    
+    
+    For i = 2 To lastrow
+        
+      
+      If Cells(i, 1).Value <> Cells(i + 1, 1).Value Then
+      
+          ticker = Cells(i, 1).Value
+          Range("I" & x).Value = ticker
+          
+           yearopen = Cells(i, 3).Value
+          yearclose = Cells(i, 6).Value
+          yearchange = yearclose - yearopen
+           Range("J" & x).Value = yearchange
+           
+        percentchange = yearclose - yearopen / yearclose
+        
+            Range("L" & x).Value = percentchange
+           
+        
+          Range("K" & x).Value = volumn
+            
+
+
+          Range("L" & x).Value = percentchange
+
+          x = x + 1
+          
+          volumn = 0
+          
+          Else
+          
+          volumn = volumn + Cells(i, 7).Value
+
+
+    End If
+    
+    Next i
+    
+Next ws
+
+
+End Sub
+
